@@ -107,8 +107,75 @@ foreign key (ma_hop_dong) references hop_dong(ma_hop_dong),
 foreign key (ma_dich_vu_di_kem) references dich_vu_di_kem(ma_dich_vu_di_kem)
 );
 
+-- update not null for all forein key
+ALTER TABLE `furama_manager`.`nhan_vien` 
+DROP FOREIGN KEY `nhan_vien_ibfk_1`,
+DROP FOREIGN KEY `nhan_vien_ibfk_2`,
+DROP FOREIGN KEY `nhan_vien_ibfk_3`;
+ALTER TABLE `furama_manager`.`nhan_vien` 
+CHANGE COLUMN `ma_vi_tri` `ma_vi_tri` INT NOT NULL ,
+CHANGE COLUMN `ma_trinh_do` `ma_trinh_do` INT NOT NULL ,
+CHANGE COLUMN `ma_bo_phan` `ma_bo_phan` INT NOT NULL ;
+ALTER TABLE `furama_manager`.`nhan_vien` 
+ADD CONSTRAINT `nhan_vien_ibfk_1`
+  FOREIGN KEY (`ma_vi_tri`)
+  REFERENCES `furama_manager`.`vi_tri` (`ma_vi_tri`),
+ADD CONSTRAINT `nhan_vien_ibfk_2`
+  FOREIGN KEY (`ma_trinh_do`)
+  REFERENCES `furama_manager`.`trinh_do` (`ma_trinh_do`),
+ADD CONSTRAINT `nhan_vien_ibfk_3`
+  FOREIGN KEY (`ma_bo_phan`)
+  REFERENCES `furama_manager`.`bo_phan` (`ma_bo_phan`);
+  
+ALTER TABLE `furama_manager`.`khach_hang` 
+CHANGE COLUMN `ma_loai_khach` `ma_loai_khach` INT NOT NULL ;
 
-
+ALTER TABLE `furama_manager`.`hop_dong_chi_tiet` 
+DROP FOREIGN KEY `hop_dong_chi_tiet_ibfk_1`,
+DROP FOREIGN KEY `hop_dong_chi_tiet_ibfk_2`;
+ALTER TABLE `furama_manager`.`hop_dong_chi_tiet` 
+CHANGE COLUMN `ma_hop_dong` `ma_hop_dong` INT NOT NULL ,
+CHANGE COLUMN `ma_dich_vu_di_kem` `ma_dich_vu_di_kem` INT NOT NULL ;
+ALTER TABLE `furama_manager`.`hop_dong_chi_tiet` 
+ADD CONSTRAINT `hop_dong_chi_tiet_ibfk_1`
+  FOREIGN KEY (`ma_hop_dong`)
+  REFERENCES `furama_manager`.`hop_dong` (`ma_hop_dong`),
+ADD CONSTRAINT `hop_dong_chi_tiet_ibfk_2`
+  FOREIGN KEY (`ma_dich_vu_di_kem`)
+  REFERENCES `furama_manager`.`dich_vu_di_kem` (`ma_dich_vu_di_kem`);
+  
+  ALTER TABLE `furama_manager`.`hop_dong` 
+DROP FOREIGN KEY `hop_dong_ibfk_1`,
+DROP FOREIGN KEY `hop_dong_ibfk_2`,
+DROP FOREIGN KEY `hop_dong_ibfk_3`;
+ALTER TABLE `furama_manager`.`hop_dong` 
+CHANGE COLUMN `ma_nhan_vien` `ma_nhan_vien` INT NOT NULL ,
+CHANGE COLUMN `ma_khach_hang` `ma_khach_hang` INT NOT NULL ,
+CHANGE COLUMN `ma_dich_vu` `ma_dich_vu` INT NOT NULL ;
+ALTER TABLE `furama_manager`.`hop_dong` 
+ADD CONSTRAINT `hop_dong_ibfk_1`
+  FOREIGN KEY (`ma_nhan_vien`)
+  REFERENCES `furama_manager`.`nhan_vien` (`ma_nhan_vien`),
+ADD CONSTRAINT `hop_dong_ibfk_2`
+  FOREIGN KEY (`ma_khach_hang`)
+  REFERENCES `furama_manager`.`khach_hang` (`ma_khach_hang`),
+ADD CONSTRAINT `hop_dong_ibfk_3`
+  FOREIGN KEY (`ma_dich_vu`)
+  REFERENCES `furama_manager`.`dich_vu` (`ma_dich_vu`);
+  
+  ALTER TABLE `furama_manager`.`dich_vu` 
+DROP FOREIGN KEY `dich_vu_ibfk_1`,
+DROP FOREIGN KEY `dich_vu_ibfk_2`;
+ALTER TABLE `furama_manager`.`dich_vu` 
+CHANGE COLUMN `ma_kieu_thue` `ma_kieu_thue` INT NOT NULL ,
+CHANGE COLUMN `ma_loai_dich_vu` `ma_loai_dich_vu` INT NOT NULL ;
+ALTER TABLE `furama_manager`.`dich_vu` 
+ADD CONSTRAINT `dich_vu_ibfk_1`
+  FOREIGN KEY (`ma_kieu_thue`)
+  REFERENCES `furama_manager`.`kieu_thue` (`ma_kieu_thue`),
+ADD CONSTRAINT `dich_vu_ibfk_2`
+  FOREIGN KEY (`ma_loai_dich_vu`)
+  REFERENCES `furama_manager`.`loai_dich_vu` (`ma_loai_dich_vu`);
 
 
 

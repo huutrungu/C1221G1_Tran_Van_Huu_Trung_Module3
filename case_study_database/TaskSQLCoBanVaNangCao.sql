@@ -327,9 +327,7 @@ from nhan_vien
 union
 select khach_hang.ma_khach_hang as `id`,khach_hang.ho_ten,khach_hang.email,khach_hang.so_dien_thoai,khach_hang.ngay_sinh,
 khach_hang.dia_chi, "khach_hang" as `role`
-from khach_hang;
-
--- SQL NÂNG CAO
+from khach_hang
 
 
 

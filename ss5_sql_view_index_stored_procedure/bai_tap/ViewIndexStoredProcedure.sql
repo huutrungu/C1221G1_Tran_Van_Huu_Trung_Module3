@@ -75,7 +75,7 @@ create procedure delete_product_by_id(in `id` int)
 begin 
 delete from products
 where id = `id`;
-end // 
+end; //  
 delimiter ;
 
 set sql_safe_updates = 0;
